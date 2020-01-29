@@ -1,0 +1,32 @@
+name: Test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test token
+        uses: GonzalezAndrew/vault-actions@master
+        with:
+          vault_version: 1.2.3
+          vault_url: "${{ secrets.VAULT_URL }}"
+          vault_token: "${{ secrets.VAULT_TOKEN }}"
+          secret_path: github/secret
+      - name: Test userpass
+        uses: GonzalezAndrew/vault-actions@master
+        with:
+          vault_version: 1.2.3
+          vault_url: "${{ secrets.VAULT_URL }}"
+          vault_token: "${{ secrets.VAULT_TOKEN }}"
+          secret_path: github/secret
+          auth_method: userpass
+          password: "${{ secrets.PASSWORD }}"
+      - name: Test approle
+        uses: GonzalezAndrew/vault-actions@master
+        with:
+          vault_version: 1.2.3
+          vault_url: "${{ secrets.VAULT_URL }}"
+          vault_token: null
+          secret_path: github/secret
+          auth_method: approle
+          role_id: "${{ secrets.ROLE_ID }}"
+          secret_id: "${{ secrets.SECRET_ID }}"

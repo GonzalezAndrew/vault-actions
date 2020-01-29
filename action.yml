@@ -1,0 +1,38 @@
+name: Vault Action
+author: Andrew Gonzalez <andrewgonzo23@gmal.com>
+description: Vault Secret Management Service
+branding:
+  icon: "lock"
+  color: "purple"
+inputs:
+  vault_version:
+    description: The Vault versions to be installed and used
+    required: true
+  vault_url:
+    description: The Vault URL
+    required: true
+  secret_path:
+    description: The Secrets Engine Path
+    required: true
+  vault_token:
+    description: The Vault Token used for authentication
+    required: true
+  auth_method:
+    description: The Authentication Method
+    required: true 
+    default: "token"
+  role_id:
+    description: The role id for AppRole
+    required: false
+    default: "null"
+  secret_id:
+    description: The secret id for AppRole
+    required: false
+    default: "null"
+  password:
+    description: The password for userpass
+    required: false 
+    default: "null"
+runs:
+  using: docker
+  image: Dockerfile
